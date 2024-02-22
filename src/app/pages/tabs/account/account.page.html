@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="power-outline" style="color: white"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-button slot="end" fill="clear">Editar</ion-button>
+      <ion-label>
+        <h4>Ovídio José Farias</h4>
+        <p>(42)988798237 | ojcfarias&#64;gmail.com</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none" detail="true"></ion-item>
+    <ion-icon name="home-outline" slot="slot" color="darck"></ion-icon>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="primary">Ultimos Pedidos</ion-label>
+    </ion-list-header>
+    <ion-item-group>
+      <ion-item lines="none">
+        <ion-label>
+          <h4>Dom Henrique</h4>
+          <p>Guarapuva, Paraná</p>
+          <ion-text>
+            <p>
+              R$: 60.00
+              <ion-icon name="chevron-foward-outline"></ion-icon>
+            </p>
+          </ion-text>
+        </ion-label>
+        <ion-note slot="end" color="dark">
+          Entregue <ion-icon name="checkmarck-circle-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-text color="dark">
+            <p>Pizza x2</p>
+            <p>Burguer x2</p>
+          </ion-text>
+          <p style="margin-top: 2%">Janeiro 29,2024</p>
+          <ion-row>
+            <ion-col col="6">
+              <ion-button fill="outline" expand="block" color="dark">Pedir Novamente</ion-button>
+            </ion-col>
+            <ion-col col="6">
+              <ion-button fill="outline" expand="block" color="dark">Abrir Reclamação</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>
