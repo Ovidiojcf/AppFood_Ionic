@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
     this.isLoading = true;
     setTimeout(()=>{
       this.banners = [
-        { banner: 'assets/imgs/img1.jpeg' },
+        { banner: 'assets/imgs/tacos.jpg' },
         { banner: 'assets/imgs/img2.jpeg' },
         { banner: 'assets/imgs/img3.jpeg' },
       ];

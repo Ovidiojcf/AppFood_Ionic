@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -13,6 +14,7 @@ export class ItensPage implements OnInit {
         uid: 'dh1',
         cover: 'assets/imgs/img1.jpeg',
         name: 'Dom Henrique 1',
+        addres: 'Santarém- PA',
         short_name: 'domhenrique1',
         cuisines: ['Almoço', 'Café', 'Hamburguer'],
         rating: 5,
@@ -97,11 +99,13 @@ export class ItensPage implements OnInit {
       }
     ];
   data: any = {};
+  cartData: any = {};
+  storeData: any = {};
   itens: any[] = [];
   id: any;
   veg: boolean = false;
 
-  constructor( private route: ActivatedRoute, private navCtrl: NavController) { }
+  constructor( private route: ActivatedRoute, private navCtrl: NavController, private router: Router) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
@@ -112,13 +116,35 @@ export class ItensPage implements OnInit {
       this.id = paramMap.get('restaurantId');
       console.log(this.id);
     });
+    this.getItens();//função para carregar
   }
   
-  getItens(){
+  async getItens(){
     this.data = {};
     let data : any = this.restaurants.filter(x => x.uid === this.id);
     this.data = data [0];
-    this.itens = this.allItems;
+    this.itens = this.allItems.filter(x => x.uid === this.id );
+    this.cartData = {};
+    this.storeData = {};
+    let cart: any = await this.getCart();
+    if(cart?.value){
+      this.storeData = JSON.parse(cart.value);
+      if(this.id == this.storeData.restaurant.uid &&
+        this.allItems.length > 0 ){
+          this.allItems.forEach((element: any) => {
+            this.storeData.forEach(ele => {
+              if(element.id != ele.id) return;
+              element.quantity = ele.quantity;
+            });
+          });
+        }
+    }
+    this.cartData.totalItem = this.storeData.totalItem;
+    this.cartData.totalPrice = this.storeData.totalPrice;
+  }
+
+  async getCart(){
+    return Preferences.get({key: 'cart'});
   }
 
   getCuisine(cuisine){
@@ -127,6 +153,71 @@ export class ItensPage implements OnInit {
 
   vegOnly(event){
     console.log(event.detail.checked);
+    if(event.detail.checked == true){
+      this.itens = this.allItems.filter(x => x.veg == true);
+    }else{
+      this.itens = this.allItems;
+    }
+  }
+
+  quantityPlus(item,index){
+    try{
+      if(!this.itens[index].quantity || this.itens[index].quantity == 0){
+        this.itens[index].quantity = 1;
+      }else{
+        this.itens[index].quantity += 1;
+      }
+      this.calculate();
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  quantityMinus(item,index){
+    if(this.itens[index].quantity !==0){
+      this.itens[index].quantity -=1;
+    }else{
+      this.itens[index].quantity = 0;
+    }
+    this.calculate();
+  }
+
+  async saveToCart(){
+    try {
+      this.cartData.restaurant = {};
+      this.cartData.restaurant = this.data;
+      await Preferences.set({
+        key: 'cart',
+        value: JSON.stringify(this.cartData)
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async viewCart(){
+    if(this.cartData.itens && this.cartData.itens.length >0){
+      await this.saveToCart();
+      this.router.navigate([this.router.url + '/cart']);
+    }
+  }
+
+  calculate(){
+    this.cartData.itens = {};
+    let item = this.itens.filter( x => x.quantity > 0);
+    this.cartData.itens = item;
+    console.log(this.cartData);
+    this.cartData.totalPrice = 0;
+    this.cartData.totalItem = 0;
+    item.forEach(element => {
+      this.cartData.totalItem += element.quantity;
+      this.cartData.totalPrice += (parseFloat(element.price)* parseFloat(element.quantity()));
+    });
+    this.cartData.totalPrice = parseFloat(this.cartData.totalPrice).toFixed(2);
+    if(this.cartData.totalItem == 0){
+      this.cartData.totalItem = 0;
+      this.cartData.totalPrice = 0;
+    }
   }
 
 }
