@@ -19,9 +19,9 @@ export class HomePage implements OnInit {
     this.isLoading = true;
     setTimeout(()=>{
       this.banners = [
-        { banner: 'assets/imgs/tacos.jpg' },
-        { banner: 'assets/imgs/img2.jpeg' },
-        { banner: 'assets/imgs/img3.jpeg' },
+        { banner: '../../../assets/imgs/tacos.jpg' },
+        { banner: '../../../assets/imgs/img2.jpeg' },
+        { banner: '../../../assets/imgs/img3.jpeg' },
       ];
       this.restaurants = [
         {
@@ -58,7 +58,7 @@ export class HomePage implements OnInit {
           price: 100,
         },
       ];
-    },300);
-    this.isLoading = false;
+      this.isLoading = false;
+    },3000);
   }
 }

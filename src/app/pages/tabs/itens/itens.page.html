@@ -80,9 +80,9 @@
           </ion-text>
         </ion-row>
         <ion-row *ngIf="item?.quantity > 0">
-          <ion-icon color="success" name="remove-outline"(click)="quantityMinus(item,i)"></ion-icon>
-          <ion-text class="ion-padding-horizontal quantity" color="success">0</ion-text>
-          <ion-icon color="success" name="add-outline"></ion-icon>
+          <ion-icon color="success" name="remove-outline" (click)="quantityMinus(item, i)"></ion-icon>
+          <ion-text class="ion-padding-horizontal" color="success">{{item?.quantity}}</ion-text>
+          <ion-icon color="success" name="add-outline" (click)="quantityPlus(item, i)"></ion-icon>
         </ion-row>
       </ion-item>
     </ng-container>
@@ -90,7 +90,7 @@
 </ion-content>
 
 <ion-footer *ngIf="cartData?.totalIem > 0 " >
-  <ion-toolbar color="success">
+  <ion-toolbar color="primary">
     <ion-label>
       <h4>{{cartData?.totalItem}} Item 
       <span *ngIf="cartData?.totalIem> 1"></span> |R$ {{cartData?.totalPrice}} </h4>

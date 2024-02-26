@@ -10,7 +10,6 @@ import { Preferences } from '@capacitor/preferences';
 export class CartPage implements OnInit {
   model: any = {};
   deliveryCharge = 20;
-  instruction: string;
 
   constructor(private router: Router) { }
 
@@ -27,8 +26,8 @@ export class CartPage implements OnInit {
     if(data?.value){
       this.model = await JSON.parse(data.value);
       console.log(this.model);
-      this.calculate();
     }
+    this.calculate();
   }
 
   async calculate(){
@@ -49,7 +48,7 @@ export class CartPage implements OnInit {
       this.model.totalItem = 0;
       this.model.totalPrice = 0;
       this.model.grandTotal = 0;
-      // await this.clearCart();
+      await this.clearCart();
       this.model = 0;
     }
   

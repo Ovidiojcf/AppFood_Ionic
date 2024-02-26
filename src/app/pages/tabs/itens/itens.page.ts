@@ -115,8 +115,9 @@ export class ItensPage implements OnInit {
       }
       this.id = paramMap.get('restaurantId');
       console.log(this.id);
+      this.getItens();//função para carregar
     });
-    this.getItens();//função para carregar
+    
   }
   
   async getItens(){
@@ -173,7 +174,7 @@ export class ItensPage implements OnInit {
     }
   }
 
-  quantityMinus(item,index){
+  quantityMinus(item , index){
     if(this.itens[index].quantity !==0){
       this.itens[index].quantity -=1;
     }else{
@@ -188,15 +189,16 @@ export class ItensPage implements OnInit {
       this.cartData.restaurant = this.data;
       await Preferences.set({
         key: 'cart',
-        value: JSON.stringify(this.cartData)
-      })
+        value: JSON.stringify(this.cartData),
+      });
     } catch (e) {
       console.log(e);
     }
   }
 
   async viewCart(){
-    if(this.cartData.itens && this.cartData.itens.length >0){
+    console.log(this.cartData);
+    if(this.cartData.itens && this.cartData.itens.length > 0){
       await this.saveToCart();
       this.router.navigate([this.router.url + '/cart']);
     }
@@ -206,6 +208,7 @@ export class ItensPage implements OnInit {
     this.cartData.itens = {};
     let item = this.itens.filter( x => x.quantity > 0);
     this.cartData.itens = item;
+    
     console.log(this.cartData);
     this.cartData.totalPrice = 0;
     this.cartData.totalItem = 0;
