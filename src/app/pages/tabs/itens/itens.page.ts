@@ -122,9 +122,10 @@ export class ItensPage implements OnInit {
   
   async getItens(){
     this.data = {};
-    let data : any = this.restaurants.filter(x => x.uid === this.id);
+    let data : any = this.restaurants.filter((x) => x.uid === this.id);
     this.data = data [0];
-    this.itens = this.allItems.filter(x => x.uid === this.id );
+    this.itens = this.allItems.filter((x) => x.uid === this.id );
+    this.categories = this.categories.filter( (x) => x.uid === this.id);
     this.cartData = {};
     this.storeData = {};
     let cart: any = await this.getCart();
@@ -208,13 +209,12 @@ export class ItensPage implements OnInit {
     this.cartData.itens = {};
     let item = this.itens.filter( x => x.quantity > 0);
     this.cartData.itens = item;
-    
     console.log(this.cartData);
     this.cartData.totalPrice = 0;
     this.cartData.totalItem = 0;
-    item.forEach(element => {
+    item.forEach( (element)  => {
       this.cartData.totalItem += element.quantity;
-      this.cartData.totalPrice += (parseFloat(element.price)* parseFloat(element.quantity()));
+      this.cartData.totalPrice += parseFloat(element.price) * parseFloat(element.quantity);
     });
     this.cartData.totalPrice = parseFloat(this.cartData.totalPrice).toFixed(2);
     if(this.cartData.totalItem == 0){

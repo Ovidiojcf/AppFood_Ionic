@@ -29,9 +29,7 @@
         <ion-text class="ion-text-center quantity" color="success"> {{item?.quantity}} </ion-text>
         <ion-icon color="success" name="add-outline" (click)="quantityPlus(i)"></ion-icon> 
       </ion-row>
-      <ion-text slot="end" color="dark" class="price">
-        R$: {{item?.price * item.quantity}}
-      </ion-text>
+      <ion-text slot="end" color="dark" class="price"> R$: {{item?.price * item.quantity}} </ion-text>
     </ion-item>
   </ion-list>
 

@@ -51,7 +51,6 @@ export class CartPage implements OnInit {
       await this.clearCart();
       this.model = 0;
     }
-  
   }
 
   clearCart(){
