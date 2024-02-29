@@ -1,0 +1,39 @@
+<ion-item-group *ngFor="let lastOrders of lastOrders">
+  <ion-item lines="none">
+    <ion-label>
+      <h4>{{ lastOrders?.name }}</h4>
+      <p>{{ lastOrders?.location }}</p>
+      <ion-text>
+        <p>
+          {{ lastOrders?.price }}
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </p>
+      </ion-text>
+    </ion-label>
+    <ion-note slot="end" color="dark">
+      {{ lastOrders?.status }}
+      <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+    </ion-note>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <ion-text *ngFor="let item of lastOrders?.items" color="dark">
+        <p>{{ item }}</p>
+      </ion-text>
+      <p style="margin-top: 2%">{{ lastOrders?.date }}</p>
+      <ion-row>
+        <ion-col col="6">
+          <ion-button fill="outline" expand="block">
+            Pedir Novamente
+          </ion-button>
+        </ion-col>
+        <ion-col col="6">
+          <ion-button fill="outline" expand="block" color="dark">
+            Abrir reclamação
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-label>
+  </ion-item>
+</ion-item-group>

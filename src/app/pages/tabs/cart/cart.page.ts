@@ -45,7 +45,8 @@ export class CartPage implements OnInit {
     this.model.deliverycharge = this.deliveryCharge;
     this.model.totalPrice = parseFloat(this.model.totalPrice).toFixed(2);
     this.model.grandTotal = (parseFloat(this.model.totalPrice) + parseFloat(this.model.deliverycharge)).toFixed(2);
-    if(this.model.totalPrice == 0 ){
+
+    if(this.model.totalItem == 0 ){
       this.model.totalItem = 0;
       this.model.totalPrice = 0;
       this.model.grandTotal = 0;

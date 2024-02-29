@@ -98,6 +98,9 @@ export class ItensPage implements OnInit {
         veg: false
       }
     ];
+    lastOrders = [
+      
+    ]
   data: any = {};
   cartData: any = {};
   storeData: any = {};
