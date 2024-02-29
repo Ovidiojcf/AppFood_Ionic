@@ -114,10 +114,9 @@ export class ItensPage implements OnInit {
         return;
       }
       this.id = paramMap.get('restaurantId');
-      console.log(this.id);
-      this.getItens();//função para carregar
+      console.log(this.id);   
     });
-    
+    this.getItens();//função para carregar
   }
   
   async getItens(){
@@ -128,7 +127,7 @@ export class ItensPage implements OnInit {
     this.categories = this.categories.filter( (x) => x.uid === this.id);
     this.cartData = {};
     this.storeData = {};
-    let cart: any = await this.getCart();
+    let cart = await this.getCart();
     if(cart?.value){
       this.storeData = JSON.parse(cart.value);
       if(this.id == this.storeData.restaurant.uid &&
@@ -143,6 +142,7 @@ export class ItensPage implements OnInit {
     }
     this.cartData.totalItem = this.storeData.totalItem;
     this.cartData.totalPrice = this.storeData.totalPrice;
+    console.log(this.data);
   }
 
   async getCart(){
@@ -190,7 +190,7 @@ export class ItensPage implements OnInit {
       this.cartData.restaurant = this.data;
       await Preferences.set({
         key: 'cart',
-        value: JSON.stringify(this.cartData),
+        value : JSON.stringify(this.cartData)
       });
     } catch (e) {
       console.log(e);
@@ -198,11 +198,11 @@ export class ItensPage implements OnInit {
   }
 
   async viewCart(){
-    console.log(this.cartData);
+    //console.log(this.cartData);
     if(this.cartData.itens && this.cartData.itens.length > 0){
       await this.saveToCart();
-      this.router.navigate([this.router.url + '/cart']);
     }
+    this.router.navigate([this.router.url + '/cart']);
   }
 
   calculate(){

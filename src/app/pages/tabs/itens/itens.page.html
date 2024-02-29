@@ -89,8 +89,8 @@
   </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="cartData?.totalIem > 0 " >
-  <ion-toolbar color="primary">
+<ion-footer *ngIf="cartData?.totalItem > 0 " >
+  <ion-toolbar color="success">
     <ion-label>
       <h4>{{cartData?.totalItem}} Item 
       <span *ngIf="cartData?.totalIem> 1"></span> |R$ {{cartData?.totalPrice}} </h4>

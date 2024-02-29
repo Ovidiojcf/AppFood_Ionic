@@ -26,12 +26,13 @@ export class CartPage implements OnInit {
     if(data?.value){
       this.model = await JSON.parse(data.value);
       console.log(this.model);
+      this.calculate();
     }
-    this.calculate();
+    console.log(this.getCart());
   }
 
   async calculate(){
-    let item = this.model.itens.filter(x => x.quantity > 0 );
+    let item = this.model.itens.filter( (x) => x.quantity > 0 );
     this.model.itens = item;
     this.model.totalPrice = 0;
     this.model.totalItem =  0;
@@ -57,8 +58,9 @@ export class CartPage implements OnInit {
     return Preferences.remove({key: 'cart'});
   }
 
-  quantityMinus(index){}
+
   quantityPlus(index){}
+  quantityMinus(index){}
   addAddress(){}
   changeAddress(){}
 

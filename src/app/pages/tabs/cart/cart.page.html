@@ -11,8 +11,7 @@
   <ion-list lines="none">
     <ion-item>
       <ion-thumbnail slot="start">
-        <ion-img [src]="model?.restaurant?.cover? model.restaurant.cover : './../src/assets/imgs/error.jpg' ">
-        </ion-img>      
+        <ion-img [src]="model?.restaurant?.cover ? model.restaurant.cover : 'assets/img/suberro.jpg' "/>     
       </ion-thumbnail>
       <ion-label>
         <ion-text>
@@ -29,7 +28,7 @@
         <ion-text class="ion-text-center quantity" color="success"> {{item?.quantity}} </ion-text>
         <ion-icon color="success" name="add-outline" (click)="quantityPlus(i)"></ion-icon> 
       </ion-row>
-      <ion-text slot="end" color="dark" class="price"> R$: {{item?.price * item.quantity}} </ion-text>
+      <ion-text slot="end" color="dark" class="price"> R$: {{item?.price * item?.quantity}} </ion-text>
     </ion-item>
   </ion-list>
 
@@ -37,8 +36,8 @@
     <ion-icon slot="start" name="list-outline"></ion-icon>
     <ion-input type="text" placeholder="Alguma alteração? Vamos fazer o nosso melhor"></ion-input>
   </ion-item>
-    <ion-list>
 
+    <ion-list>
       <ion-list-header>
         <ion-label color="tertiary"><h5>Detalhes</h5></ion-label>
       </ion-list-header>

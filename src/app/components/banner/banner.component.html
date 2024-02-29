@@ -9,7 +9,7 @@
       [pagination]="{clickable: true, dynamicBullets: true}"
     >
       <swiper-slide *ngFor="let image of bannerImages">
-        <img src="image?.banner"/>
+        <img [src]="image?.banner"/>
       </swiper-slide>
     </swiper-container>
   </div>
